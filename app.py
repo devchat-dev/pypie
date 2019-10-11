@@ -18,7 +18,7 @@ app = Flask(__name__)
 # Firebbase configs (for storing thxs)
 FIREBASE_URL = os.environ.get("FB_URL")
 FIREBASE_TOKEN = os.environ.get("FB_TOKEN")
-#if you dont wnat to keep ecord of # of 'thx', set this to False
+#if you dont want to keep record of # of 'thx', set this to False
 FB = True
 # Slack token
 SLACK_TOKEN = os.environ.get("SLACK_TOKEN")
@@ -34,7 +34,7 @@ def hello_world():
 @app.route('/message', methods=['POST'])
 def chat_message():
     raw_msg = request.form.get('text')
-    username = request.form.get('user_name'
+    username = request.form.get('user_name')
     if request.form.get('token') == SLACK_TOKEN:
         old_stdout = sys.stdout
         sys.stdout = strstdout = StringIO()
@@ -59,5 +59,5 @@ def chat_message():
             if not any(word in msg for word in blacklist):
                 exec('print (' + msg + ')')
             else:
-                print('sorry, no `{0}` for u, {1}'.format(msg, username)
+                print('sorry, no `{0}` for u, {1}'.format(msg, username))
         return json.dumps({'text': strstdout.getvalue().strip('\n')})
